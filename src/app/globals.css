@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
+/* Il tema scuro non segue il sistema: vale solo dentro .dark (area redazione). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Token di buckled.it (kit Elementor 419 e template delle guide). */
+@theme {
+  --color-buckled-yellow: #f2b531;
+  --color-buckled-orange: #faa916;
+  --color-buckled-green: #00261c;
+  --color-buckled-teal: #014948;
+  --color-buckled-paper: #f9f9f9;
+  --color-buckled-mist: #e7eded;
+
+  --font-sans: var(--font-dm-sans), "DM Sans", Arial, sans-serif;
+  --font-display: var(--font-unbounded), "Unbounded", Arial, sans-serif;
+
+  /* Angoli vivi come sul sito originale. */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Griglia di punti delle pagine guida di buckled.it. */
+  background: #fff url("/bg/dot-grid-white.webp") repeat;
+  color: var(--color-buckled-green);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+h1 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+/* Link nei testi come sul sito: grassetti e sottolineati. */
+p a {
+  font-weight: 700;
+}
+
+@layer components {
+  /* Scheda delle guide: bianca, bordo nero, ombra arancione al passaggio. */
+  .card {
+    background: #fff;
+    border: 1px solid #000;
+    transition: box-shadow 0.15s ease;
+  }
+  .card-hover:hover,
+  .card-hover:focus-within {
+    box-shadow: 5px 5px 0 0 var(--color-buckled-orange);
+  }
+}
+
+/* Area redazione: lo sfondo di buckled.it/reviews (griglia di punti su nero). */
+.redazione-bg {
+  color-scheme: dark;
+  background-color: #000;
+  background-image: url("/bg/dot-grid-black.webp");
+  background-repeat: repeat;
+  color: #ededed;
+}
+.redazione-bg .card {
+  background: #0a0a0a;
+  border-color: #3f3f46;
 }

@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Buckled Gear Wiki
 
-## Getting Started
+Wiki del materiale da trail running per la community Buckled.
 
-First, run the development server:
+Stack: Next.js 16 (App Router, Cache Components), Postgres, Drizzle ORM, Better Auth, Zod, Vitest + PGlite.
+
+## Sviluppo locale
+
+### Tutto in Docker
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+make up      # database + app su http://localhost:3000 (crea .env, migra, fa il seed)
+make down    # ferma e rimuove i container, i dati restano
+make reset   # cancella anche i dati e riparte da zero
+make demo    # aggiunge 8 runner finti con equipaggiamenti e feedback (statistiche e classifiche visibili)
+make         # elenco completo (logs, test, psql, shell…)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Il codice è montato nel container: le modifiche si vedono subito.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### App sull'host, database in Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Serve pnpm.
 
-## Learn More
+```bash
+pnpm install
+cp .env.example .env          # poi genera BETTER_AUTH_SECRET: openssl rand -base64 32
+pnpm db:up                    # Postgres 17 in Docker su localhost:5432
+pnpm db:migrate               # applica le migrazioni in drizzle/
+pnpm db:seed                  # catalogo Sole Survivors + primo redattore
+pnpm dev                      # http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+Accedi con `SEED_REDATTORE_EMAIL` / `SEED_REDATTORE_PASSWORD` del `.env`: al primo accesso viene chiesto di cambiare password.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Comandi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Comando | Cosa fa |
+|---|---|
+| `pnpm dev` | server di sviluppo |
+| `pnpm test` | test (Vitest, database PGlite in memoria: non serve Docker) |
+| `pnpm typecheck` / `pnpm lint` | controlli statici |
+| `pnpm db:generate` | genera una migrazione dopo aver cambiato `src/db/schema/` |
+| `pnpm db:migrate` | applica le migrazioni |
+| `pnpm db:seed` | seed idempotente (si può rilanciare) |
+| `pnpm db:seed:demo` | runner finti `demoN@buckled.local`, solo sviluppo |
+| `pnpm db:studio` | Drizzle Studio per esplorare i dati |
+| `pnpm db:reset` | **cancella** il database locale e lo ricrea da zero |
 
-## Deploy on Vercel
+## Struttura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+drizzle/                 migrazioni SQL generate (0000 abilita pg_trgm)
+scripts/                 seed (catalogo + redattore) e seed demo
+src/db/schema/           schema Drizzle; src/db/enum-values.ts ha i valori usabili anche nel browser
+src/lib/                 logica senza Next, testata con PGlite:
+  session.ts             requireUser() / requireRedattore(): unico punto di controllo
+  catalog.ts, search.ts  letture pubbliche, filtri e ricerca fuzzy
+  categories.ts          campi specifici di ogni categoria (non scarpe): validazione, form, filtri
+  guides.ts              guide curate (premi, badge, note)
+  stats.ts               aggregati, routing taglia, classifiche (soglia K in config.ts)
+  gear.ts, profile.ts    equipaggiamento, feedback, profilo (sempre filtrati per proprietario)
+  proposals.ts           proposte e revisione
+  admin-*.ts             utenti, catalogo, recensioni (redazione)
+src/app/actions/         Server Actions: controllo permessi + validazione Zod + chiamata a src/lib
+tests/                   test Vitest
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Pagine
+
+| Percorso | Chi |
+|---|---|
+| `/` ricerca, classifiche, catalogo con filtri · `/scarpe/[slug]` · `/prodotti/[slug]` · `/guide`, `/guide/[slug]` | tutti |
+| `/equipaggiamento`, `/proposte`, `/profilo` | utenti |
+| `/redazione/catalogo`, `/redazione/guide`, `/redazione/proposte`, `/redazione/utenti` | redazione |
+
+## Note
+
+- Categorie: le scarpe hanno colonne tipizzate (`shoe_specs`) perché alimentano statistiche e filtri; le altre categorie salvano i propri campi in `products.attributes` (jsonb), definiti in `src/lib/categories.ts`. Per aggiungere un campo basta aggiungerlo lì.
+- Equipaggiamento, feedback e statistiche della community sono solo per le scarpe.
+- Foto prodotto in `public/products/`, **fuori dal repo** (diritti delle immagini): elenco e URL originali in `src/db/seed/images.ts`. Su un clone nuovo la cartella non c'è: si riempie importando uno ZIP del catalogo dalla redazione (Esporta / Importa). Online le foto stanno tutte su Vercel Blob.
+- La registrazione è disattivata: gli account li crea la redazione.
+- Il ruolo `redattore` non ha il permesso di impersonare utenti, così nessuno vede equipaggiamenti e feedback altrui.
+- Le pagine che leggono la sessione stanno dietro `<Suspense>`: con Cache Components leggere cookie o header fuori da un boundary è un errore di build.
+
+## Deploy
+
+Vercel + Neon + Vercel Blob. Build command: `pnpm build:vercel` (migrazioni + build). Variabili d'ambiente in `.env.example`.

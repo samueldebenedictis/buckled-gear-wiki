@@ -1,0 +1,9 @@
+# Immagine per lo sviluppo locale: il codice arriva via bind mount (vedi docker-compose.yml).
+FROM node:24-alpine
+RUN corepack enable
+WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED=1
+EXPOSE 3000
+# Install, migrazioni e seed (idempotente) a ogni avvio, poi il dev server.
+# Un seed fallito non blocca l'avvio: l'errore resta nei log (make logs).
+CMD ["sh", "-c", "pnpm install --frozen-lockfile && pnpm db:migrate && (pnpm db:seed || echo 'ATTENZIONE: seed non riuscito, vedi sopra') && pnpm dev --hostname 0.0.0.0"]

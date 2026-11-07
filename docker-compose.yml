@@ -1,0 +1,55 @@
+# Ambiente locale completo: Postgres + app Next in dev. In produzione si usano Neon e Vercel.
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: buckled
+      POSTGRES_PASSWORD: buckled
+      POSTGRES_DB: buckled_gear
+    # Solo su questo computer: la password di sviluppo è debole.
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U buckled -d buckled_gear"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    env_file: .env
+    environment:
+      # Dentro la rete di compose il database si chiama "db", non localhost.
+      DATABASE_URL: postgres://buckled:buckled@db:5432/buckled_gear
+      BETTER_AUTH_URL: http://localhost:3000
+      COREPACK_ENABLE_DOWNLOAD_PROMPT: "0"
+      # Store di pnpm fuori dalla cartella del progetto.
+      npm_config_store_dir: /pnpm-store
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - .:/app
+      # node_modules e .next restano nel container, separati da quelli dell'host.
+      - node_modules:/app/node_modules
+      - next_cache:/app/.next
+      - pnpm_store:/pnpm-store
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/login > /dev/null || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 20s
+
+volumes:
+  pgdata:
+  node_modules:
+  next_cache:
+  pnpm_store:
