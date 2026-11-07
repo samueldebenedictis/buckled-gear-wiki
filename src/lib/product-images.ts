@@ -22,9 +22,13 @@ const blobEnabled = () => !!(process.env.BLOB_STORE_ID || process.env.BLOB_READ_
 const isBlobUrl = (p: string | null) => !!p && /^https:\/\/[^/]+\.blob\.vercel-storage\.com\//.test(p);
 const MIME = { png: "image/png", jpg: "image/jpeg", webp: "image/webp", avif: "image/avif" } as const;
 
+// Le anteprime Vercel usano una copia del database di produzione: le sue foto sono
+// quelle di produzione. Lì non si cancella niente (al massimo resta qualche file orfano).
+const canDelete = () => !process.env.VERCEL_ENV || process.env.VERCEL_ENV === "production";
+
 /** Elimina dal Blob una foto caricata in precedenza (le foto locali e del seed restano). */
 async function dropOld(imagePath: string | null) {
-  if (isBlobUrl(imagePath) && blobEnabled()) {
+  if (isBlobUrl(imagePath) && blobEnabled() && canDelete()) {
     try {
       await del(imagePath!);
     } catch (e) {

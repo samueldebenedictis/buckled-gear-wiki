@@ -1,10 +1,10 @@
 // Factory del client senza "server-only": usata da app, script e test.
 import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
+import { Pool, type PoolConfig } from "pg";
 import * as schema from "./schema";
 
-export function createDb(connectionString: string) {
-  const pool = new Pool({ connectionString });
+export function createDb(connectionString: string, opts: Omit<PoolConfig, "connectionString"> = {}) {
+  const pool = new Pool({ connectionString, ...opts });
   return { db: drizzle(pool, { schema }), pool };
 }
 
