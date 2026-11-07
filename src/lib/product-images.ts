@@ -1,6 +1,7 @@
 // Foto prodotto caricate dalla redazione.
-// - Con BLOB_READ_WRITE_TOKEN (Vercel, dove il disco è in sola lettura) vanno su
-//   Vercel Blob, servite dalla CDN; nel DB resta l'URL.
+// - Con uno store Vercel Blob collegato (BLOB_STORE_ID con login OIDC automatico,
+//   o il vecchio BLOB_READ_WRITE_TOKEN) vanno su Blob, servite dalla CDN; nel DB
+//   resta l'URL. Su Vercel il disco è in sola lettura.
 // - Senza (sviluppo locale) finiscono in public/products, servite da Next.
 // Le foto del seed restano in public/products in ogni caso: sono nel repository.
 import { createHash } from "node:crypto";
@@ -17,7 +18,7 @@ const DIR = path.join(process.cwd(), "public", "products");
 
 export class ImageError extends Error {}
 
-const blobEnabled = () => !!process.env.BLOB_READ_WRITE_TOKEN;
+const blobEnabled = () => !!(process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN);
 const isBlobUrl = (p: string | null) => !!p && /^https:\/\/[^/]+\.blob\.vercel-storage\.com\//.test(p);
 const MIME = { png: "image/png", jpg: "image/jpeg", webp: "image/webp", avif: "image/avif" } as const;
 
