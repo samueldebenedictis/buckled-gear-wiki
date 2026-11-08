@@ -21,7 +21,7 @@ export function ProductImage({
   plain?: boolean;
 }) {
   return (
-    <div className={`relative overflow-hidden ${plain ? "" : "aspect-[4/3] bg-buckled-paper"} ${className}`}>
+    <div className={`relative overflow-hidden ${plain ? "" : "aspect-4/3 bg-buckled-paper"} ${className}`}>
       {src ? (
         <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={`object-contain ${plain ? "" : "p-4"}`} />
       ) : (

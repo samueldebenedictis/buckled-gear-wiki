@@ -47,7 +47,7 @@ export function HeaderMenu({ children }: { children: ReactNode }) {
         hidden={!open}
         // Un clic su un link (o su "Esci") chiude il pannello.
         onClick={(e) => (e.target as HTMLElement).closest("a, button") && setOpen(false)}
-        className="absolute inset-x-0 top-full z-50 border-b border-black bg-buckled-green px-[30px] py-[30px] text-white max-md:py-[15px]"
+        className="absolute inset-x-0 top-full z-50 border-b border-black bg-buckled-green px-7.5 py-7.5 text-white max-md:py-3.75"
       >
         {children}
       </div>
@@ -61,12 +61,12 @@ export function HeaderMenu({ children }: { children: ReactNode }) {
  */
 export function MenuColumn({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="flex min-w-[140px] flex-col items-start md:flex-1">
-      <p className="mb-1.5 font-display text-[15px] leading-[15px] font-black text-white uppercase">{title}</p>
+    <div className="flex min-w-35 flex-col items-start md:flex-1">
+      <p className="mb-1.5 font-display text-[15px] leading-3.75 font-black text-white uppercase">{title}</p>
       {children}
     </div>
   );
 }
 
 export const menuItemClass =
-  "border-l border-white py-[2px] pl-[7px] text-left text-[14px] leading-[18px] font-semibold text-white hover:text-buckled-yellow";
+  "border-l border-white py-0.5 pl-1.75 text-left text-[14px] leading-4.5 font-semibold text-white hover:text-buckled-yellow";

@@ -31,7 +31,7 @@ export function ProductHeader({ p }: { p: PublicProduct }) {
         />
       </div>
       <div className="flex flex-col justify-center gap-2 px-5 pb-5 sm:p-6">
-        <p className="font-display text-[14px] leading-[21px] font-black text-black uppercase">{p.brand}</p>
+        <p className="font-display text-[14px] leading-5.25 font-black text-black uppercase">{p.brand}</p>
         <h1 className="font-display text-3xl leading-tight font-semibold tracking-normal text-black normal-case sm:text-4xl">
           {name}
         </h1>

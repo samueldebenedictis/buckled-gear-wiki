@@ -237,7 +237,7 @@ export function ImageSection({ p }: { p: Product }) {
       <h2 className="text-lg font-semibold">Foto</h2>
       {/* Come nelle schede pubbliche: foto su fondo bianco con la griglia. */}
       <div className="max-w-md border border-white/25 bg-white bg-[url(/bg/gridme.png)] bg-center p-4">
-        <ProductImage src={p.product.imagePath} alt={p.product.displayName} plain sizes="(min-width: 768px) 450px, 100vw" className="aspect-[4/3] w-full" />
+        <ProductImage src={p.product.imagePath} alt={p.product.displayName} plain sizes="(min-width: 768px) 450px, 100vw" className="aspect-4/3 w-full" />
       </div>
       <form onSubmit={upload.onSubmit} className="flex flex-wrap items-end gap-3">
         <input type="hidden" name="productId" value={p.product.id} />

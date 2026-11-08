@@ -13,7 +13,7 @@ export function Insufficient() {
   return <span className="text-sm text-zinc-500">dati insufficienti</span>;
 }
 
-const barText = "font-sans text-[11px] leading-[25px] font-black text-black uppercase";
+const barText = "font-sans text-[11px] leading-6.25 font-black text-black uppercase";
 
 /** Giallo per la community, verde acqua chiaro per la redazione. */
 type Tone = "community" | "redazione";
@@ -41,10 +41,10 @@ function Bar({
       aria-valuemax={100}
       aria-valuenow={Math.round(share * 100)}
       title={title}
-      className="relative h-[25px] overflow-hidden bg-buckled-paper"
+      className="relative h-6.25 overflow-hidden bg-buckled-paper"
     >
       <div className={`absolute inset-y-0 left-0 ${fill[tone]}`} style={{ width: pct(share) }} />
-      <div className={`relative flex justify-between gap-3 px-[15px] ${barText}`}>
+      <div className={`relative flex justify-between gap-3 px-3.75 ${barText}`}>
         <span className="truncate">{label}</span>
         <span className="shrink-0 tabular-nums">{value}</span>
       </div>
@@ -72,7 +72,7 @@ export function ShareBar({ label, share }: { label: string; share: number }) {
 
 function EmptyBar({ label }: { label: string }) {
   return (
-    <div className={`flex h-[25px] justify-between gap-3 bg-buckled-paper px-[15px] ${barText}`}>
+    <div className={`flex h-6.25 justify-between gap-3 bg-buckled-paper px-3.75 ${barText}`}>
       <span className="truncate">{label}</span>
       <span className="font-medium text-zinc-500 normal-case">dati insufficienti</span>
     </div>
@@ -85,13 +85,13 @@ export function FitStatRow({ label, field, stat }: { label: string; field: FitFi
   const top = fitWord(field, stat.avg);
   return (
     <div className="grid grid-cols-[8rem_repeat(3,minmax(0,1fr))] gap-px max-sm:grid-cols-3">
-      <span className={`bg-buckled-paper px-[15px] ${barText} max-sm:col-span-3`}>{label}</span>
+      <span className={`bg-buckled-paper px-3.75 ${barText} max-sm:col-span-3`}>{label}</span>
       {stat.distribution.map((d) => {
         const choice = FIT_CHOICES[field][d.value + 1];
         return (
           <div
             key={d.value}
-            className={`flex h-[25px] justify-between gap-2 px-2.5 ${barText} ${choice === top ? "bg-buckled-yellow" : "bg-buckled-paper"}`}
+            className={`flex h-6.25 justify-between gap-2 px-2.5 ${barText} ${choice === top ? "bg-buckled-yellow" : "bg-buckled-paper"}`}
           >
             <span className="truncate">{choice}</span>
             <span className="tabular-nums">{pct(d.share)}</span>
@@ -115,7 +115,7 @@ export function ChoiceRow({ choices, selected }: { choices: readonly string[]; s
         <div
           key={c}
           aria-current={selected.includes(c) ? "true" : undefined}
-          className={`h-[25px] px-[15px] ${barText} ${selected.includes(c) ? fill.redazione : "bg-buckled-paper text-zinc-400"}`}
+          className={`h-6.25 px-3.75 ${barText} ${selected.includes(c) ? fill.redazione : "bg-buckled-paper text-zinc-400"}`}
         >
           {c}
         </div>
@@ -128,12 +128,12 @@ export function ChoiceRow({ choices, selected }: { choices: readonly string[]; s
 export function FitChoiceRow({ label, field, value }: { label: string; field: FitField; value: number }) {
   return (
     <div className="grid grid-cols-[8rem_repeat(3,minmax(0,1fr))] gap-px max-sm:grid-cols-3">
-      <span className={`bg-buckled-paper px-[15px] ${barText} max-sm:col-span-3`}>{label}</span>
+      <span className={`bg-buckled-paper px-3.75 ${barText} max-sm:col-span-3`}>{label}</span>
       {FIT_CHOICES[field].map((choice, i) => (
         <div
           key={choice}
           aria-current={i - 1 === value ? "true" : undefined}
-          className={`h-[25px] px-2.5 ${barText} ${i - 1 === value ? fill.redazione : "bg-buckled-paper text-zinc-400"}`}
+          className={`h-6.25 px-2.5 ${barText} ${i - 1 === value ? fill.redazione : "bg-buckled-paper text-zinc-400"}`}
         >
           {choice}
         </div>

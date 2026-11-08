@@ -172,7 +172,7 @@ function Row({ item: i }: { item: AdminProductRow }) {
       />
       <Link href={url} className="flex min-w-0 flex-1 flex-col gap-1 py-3 hover:underline">
         <span className="font-display text-[12px] leading-tight text-zinc-400 lowercase">{i.brand}</span>
-        <span className="font-display text-[13px] leading-tight font-semibold break-words uppercase">{name}</span>
+        <span className="font-display text-[13px] leading-tight font-semibold wrap-break-word uppercase">{name}</span>
         <span className="flex flex-wrap gap-1">
           <AdminTag>{CATEGORY_LABELS[i.category]}</AdminTag>
           {i.status === "bozza" && <AdminTag tone="amber">bozza</AdminTag>}

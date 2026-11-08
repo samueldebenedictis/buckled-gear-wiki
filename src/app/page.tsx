@@ -22,7 +22,7 @@ export default function Home({ searchParams }: PageProps<"/">) {
   return (
     <main
       id="catalogo"
-      className="mx-auto flex w-full max-w-[1180px] scroll-mt-4 flex-col gap-6 px-4 py-10"
+      className="mx-auto flex w-full max-w-295 scroll-mt-4 flex-col gap-6 px-4 py-10"
     >
       <h1 className="text-center text-3xl sm:text-4xl">Catalogo</h1>
       <Suspense fallback={<p className="text-center">Caricamento…</p>}>

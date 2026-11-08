@@ -40,7 +40,7 @@ export function hrefWith(
 }
 
 const buttonBase =
-  "inline-flex items-center justify-center border border-black px-4 py-2 text-[13px] leading-[21px] font-medium text-black capitalize transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
+  "inline-flex items-center justify-center border border-black px-4 py-2 text-[13px] leading-5.25 font-medium text-black capitalize transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
 
 /** Pulsante filtro: bianco, grigio al passaggio, #E7EDED se attivo. */
 export function FilterButton({ href, pressed, children }: { href: string; pressed: boolean; children: ReactNode }) {
@@ -78,7 +78,7 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 export function ViewSwitch({ filters, panelOpen }: { filters: CatalogFilters; panelOpen: boolean }) {
   const list = filters.vista === "lista";
   const btn = (active: boolean) =>
-    `inline-flex size-[42px] items-center justify-center border p-[9px] transition-colors -ml-px first:ml-0 ${
+    `inline-flex size-10.5 items-center justify-center border p-2.25 transition-colors -ml-px first:ml-0 ${
       active ? "border-black bg-black text-white" : "border-black/55 bg-white text-black hover:border-black hover:bg-black hover:text-white"
     }`;
   return (
@@ -90,7 +90,7 @@ export function ViewSwitch({ filters, panelOpen }: { filters: CatalogFilters; pa
         title="Vista estesa"
         className={btn(!list)}
       >
-        <svg viewBox="0 0 24 24" className="size-[22px]" fill="currentColor" aria-hidden>
+        <svg viewBox="0 0 24 24" className="size-5.5" fill="currentColor" aria-hidden>
           <rect x="3" y="3" width="7" height="7" />
           <rect x="14" y="3" width="7" height="7" />
           <rect x="3" y="14" width="7" height="7" />
@@ -105,7 +105,7 @@ export function ViewSwitch({ filters, panelOpen }: { filters: CatalogFilters; pa
         title="Vista compatta"
         className={btn(list)}
       >
-        <svg viewBox="0 0 24 24" className="size-[22px]" aria-hidden>
+        <svg viewBox="0 0 24 24" className="size-5.5" aria-hidden>
           <g fill="currentColor">
             <rect x="3" y="4" width="4" height="4" />
             <rect x="3" y="10" width="4" height="4" />
@@ -155,13 +155,13 @@ export function CatalogFilterBar({
           href={hrefWith(filters, null, !open)}
           scroll={false}
           aria-expanded={open}
-          className={`inline-flex w-fit items-center gap-2 border border-black px-3 py-2 text-[13px] leading-[21px] font-medium text-black ${open ? "bg-buckled-mist" : "bg-white hover:bg-buckled-paper"}`}
+          className={`inline-flex w-fit items-center gap-2 border border-black px-3 py-2 text-[13px] leading-5.25 font-medium text-black ${open ? "bg-buckled-mist" : "bg-white hover:bg-buckled-paper"}`}
         >
           <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
             <path d="M3 5h18M6 12h12M10 19h4" />
           </svg>
           Filtra
-          {active > 0 && <span className="bg-black px-1.5 text-[11px] leading-[18px] text-white">{active}</span>}
+          {active > 0 && <span className="bg-black px-1.5 text-[11px] leading-4.5 text-white">{active}</span>}
         </Link>
         <nav aria-label="Categorie" className="flex flex-wrap gap-1.5 md:gap-2">
           <FilterButton pressed={!filters.tipo} href={hrefWith({ q: filters.q, vista: filters.vista }, null, open)}>

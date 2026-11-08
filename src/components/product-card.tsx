@@ -49,9 +49,9 @@ export function ProductCard({ item, children }: { item: CatalogItem; children?: 
 
   return (
     <article className="flex h-full flex-col border border-black bg-white shadow-[5px_5px_0_0_#000] transition-shadow hover:shadow-[5px_5px_0_0_var(--color-buckled-orange)]">
-      <header className="flex flex-col gap-[5px] border-b border-black p-5 max-md:p-[30px]">
-        <h3 className="font-display text-[14px] leading-[21px] font-black text-black uppercase">{item.brand}</h3>
-        <h2 className="font-display text-[29px] leading-[32px] font-semibold tracking-normal text-black normal-case">
+      <header className="flex flex-col gap-1.25 border-b border-black p-5 max-md:p-7.5">
+        <h3 className="font-display text-[14px] leading-5.25 font-black text-black uppercase">{item.brand}</h3>
+        <h2 className="font-display text-[29px] leading-8 font-semibold tracking-normal text-black normal-case">
           <Link href={href} className="hover:underline">
             {name}
           </Link>
@@ -70,14 +70,14 @@ export function ProductCard({ item, children }: { item: CatalogItem; children?: 
             alt=""
             plain
             sizes="(min-width: 1024px) 180px, (min-width: 768px) 25vw, 100vw"
-            className="min-h-[150px] w-full"
+            className="min-h-37.5 w-full"
           />
         </Link>
 
-        <div className="flex flex-col justify-between gap-[5px] border-t border-black bg-white p-5 md:w-1/2 md:border-t-0 md:border-l">
-          <div className="flex flex-col gap-[5px]">
+        <div className="flex flex-col justify-between gap-1.25 border-t border-black bg-white p-5 md:w-1/2 md:border-t-0 md:border-l">
+          <div className="flex flex-col gap-1.25">
             {main.map(([k, v]) => (
-              <p key={k} className="text-[14px] leading-[18px] font-semibold text-black">
+              <p key={k} className="text-[14px] leading-4.5 font-semibold text-black">
                 <span className="font-light">{k}: </span>
                 {v}
               </p>
@@ -85,8 +85,8 @@ export function ProductCard({ item, children }: { item: CatalogItem; children?: 
             {extra.length > 0 && (
               <ul className="mt-1 flex flex-col gap-1">
                 {extra.map(([k, v]) => (
-                  <li key={k} className="flex gap-1.5 text-[13px] leading-[15px] font-medium text-black lowercase">
-                    <span aria-hidden className="mt-[2px] inline-block size-[9px] shrink-0 bg-buckled-yellow" />
+                  <li key={k} className="flex gap-1.5 text-[13px] leading-3.75 font-medium text-black lowercase">
+                    <span aria-hidden className="mt-0.5 inline-block size-2.25 shrink-0 bg-buckled-yellow" />
                     {k}: {v}
                   </li>
                 ))}
@@ -97,8 +97,8 @@ export function ProductCard({ item, children }: { item: CatalogItem; children?: 
             )}
           </div>
 
-          <div className="flex items-end gap-[10px]">
-            <span aria-hidden className="h-5 flex-1 bg-[url(/bg/wave.svg)] bg-[length:20px_20px] bg-center bg-repeat-x" />
+          <div className="flex items-end gap-2.5">
+            <span aria-hidden className="h-5 flex-1 bg-[url(/bg/wave.svg)] bg-size-[20px_20px] bg-center bg-repeat-x" />
             {item.videoUrl && (
               <a
                 href={item.videoUrl}
@@ -108,7 +108,7 @@ export function ProductCard({ item, children }: { item: CatalogItem; children?: 
                 aria-label="Guarda la recensione su YouTube"
                 className="text-black hover:text-buckled-orange"
               >
-                <svg viewBox="0 0 24 24" className="size-[23px]" fill="currentColor" aria-hidden>
+                <svg viewBox="0 0 24 24" className="size-5.75" fill="currentColor" aria-hidden>
                   <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z" />
                 </svg>
               </a>
@@ -119,7 +119,7 @@ export function ProductCard({ item, children }: { item: CatalogItem; children?: 
               aria-label={`Scheda completa di ${item.name}`}
               className="text-black hover:text-buckled-orange"
             >
-              <svg viewBox="0 0 24 24" className="size-[23px]" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
+              <svg viewBox="0 0 24 24" className="size-5.75" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
                 <path d="M7 17 17 7M9 7h8v8" />
               </svg>
             </Link>
@@ -142,12 +142,12 @@ export function ProductRow({ item }: { item: CatalogItem }) {
   const name = item.name.startsWith(item.brand) ? item.name.slice(item.brand.length).trim() : item.name;
   return (
     <article className="-mt-px flex min-w-0 items-center gap-3 sm:gap-4 border border-black bg-white pr-4 transition-colors hover:bg-buckled-paper">
-      <Link href={href} tabIndex={-1} aria-hidden className="w-[110px] shrink-0 p-[15px] max-sm:w-[90px]">
-        <ProductImage src={item.imagePath} alt="" plain sizes="110px" className="aspect-[250/135] w-full" />
+      <Link href={href} tabIndex={-1} aria-hidden className="w-27.5 shrink-0 p-3.75 max-sm:w-22.5">
+        <ProductImage src={item.imagePath} alt="" plain sizes="110px" className="aspect-250/135 w-full" />
       </Link>
       <div className="flex min-w-0 flex-1 flex-col gap-0.5 py-3">
         <p className="font-display text-[13px] leading-tight font-normal text-black lowercase">{item.brand}</p>
-        <h2 className="font-display text-[13px] leading-tight font-semibold tracking-normal break-words text-black uppercase">
+        <h2 className="font-display text-[13px] leading-tight font-semibold tracking-normal wrap-break-word text-black uppercase">
           <Link href={href} className="hover:underline">
             {name}
           </Link>
@@ -166,13 +166,13 @@ export function ProductRow({ item }: { item: CatalogItem }) {
             aria-label={`Recensione di ${item.name} su YouTube`}
             className="text-black hover:text-buckled-orange"
           >
-            <svg viewBox="0 0 24 24" className="size-[18px]" fill="currentColor" aria-hidden>
+            <svg viewBox="0 0 24 24" className="size-4.5" fill="currentColor" aria-hidden>
               <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z" />
             </svg>
           </a>
         )}
         <Link href={href} title="Scheda completa" aria-label={`Scheda completa di ${item.name}`} className="text-black hover:text-buckled-orange">
-          <svg viewBox="0 0 24 24" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
+          <svg viewBox="0 0 24 24" className="size-4.5" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
             <path d="M7 17 17 7M9 7h8v8" />
           </svg>
         </Link>

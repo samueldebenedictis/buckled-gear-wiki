@@ -11,7 +11,7 @@ import { SocialLinks } from "./social-links";
 export async function UserNav() {
   const user = await getCurrentUser();
   return (
-    <nav aria-label="Menu" className="mx-auto flex max-w-[1140px] flex-wrap gap-x-[30px] gap-y-2.5 md:flex-nowrap">
+    <nav aria-label="Menu" className="mx-auto flex max-w-285 flex-wrap gap-x-7.5 gap-y-2.5 md:flex-nowrap">
       <MenuColumn title="La wiki">
         <Link href="/" className={menuItemClass}>
           Catalogo

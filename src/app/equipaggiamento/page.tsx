@@ -90,13 +90,13 @@ function GearCard({ item: { gear, product, hasFeedback } }: { item: Item }) {
       href={`/equipaggiamento/${gear.id}`}
       className="flex h-full border border-black bg-white shadow-[5px_5px_0_0_#000] transition-shadow hover:shadow-[5px_5px_0_0_var(--color-buckled-orange)]"
     >
-      <div className="flex w-[130px] shrink-0 items-center justify-center border-r border-black bg-[url(/bg/gridme.png)] bg-center p-3 max-sm:w-[100px]">
-        <ProductImage src={product.imagePath} alt="" plain sizes="130px" className={`aspect-[250/135] w-full ${retired ? "opacity-60 grayscale" : ""}`} />
+      <div className="flex w-32.5 shrink-0 items-center justify-center border-r border-black bg-[url(/bg/gridme.png)] bg-center p-3 max-sm:w-25">
+        <ProductImage src={product.imagePath} alt="" plain sizes="130px" className={`aspect-250/135 w-full ${retired ? "opacity-60 grayscale" : ""}`} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-2 p-4">
         <div>
           <p className="font-display text-[12px] leading-tight font-black uppercase">{product.brand}</p>
-          <h3 className="font-display text-[19px] leading-tight font-semibold break-words">{name}</h3>
+          <h3 className="font-display text-[19px] leading-tight font-semibold wrap-break-word">{name}</h3>
           {gear.nickname && <p className="mt-0.5 text-[14px] italic">“{gear.nickname}”</p>}
         </div>
         <dl className="flex flex-col gap-0.5 text-[14px]">

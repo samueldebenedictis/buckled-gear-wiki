@@ -76,7 +76,7 @@ async function Content({ searchParams }: Pick<Props, "searchParams">) {
           {list.map((g) => (
             <li key={g.id} className={`${adminRowClass} px-3`}>
               <Link href={`/redazione/guide/${g.id}`} className="flex min-w-0 flex-1 flex-col gap-1 py-3 hover:underline">
-                <span className="font-display text-[13px] leading-tight font-semibold break-words uppercase">{g.title}</span>
+                <span className="font-display text-[13px] leading-tight font-semibold wrap-break-word uppercase">{g.title}</span>
                 <span className="flex flex-wrap gap-1">
                   <AdminTag>{g.items === 1 ? "1 prodotto" : `${g.items} prodotti`}</AdminTag>
                   {!g.published && <AdminTag tone="amber">bozza</AdminTag>}

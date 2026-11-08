@@ -108,7 +108,7 @@ async function Content({ searchParams }: Pick<Props, "searchParams">) {
                 className={`${adminRowClass} flex-wrap justify-between px-3 py-3`}
               >
                 <div className="flex min-w-0 flex-col gap-1">
-                  <span className="font-display text-[13px] leading-tight font-semibold break-words uppercase">{u.name}</span>
+                  <span className="font-display text-[13px] leading-tight font-semibold wrap-break-word uppercase">{u.name}</span>
                   <span className="text-sm break-all text-zinc-400">{u.email}</span>
                   <span className="flex flex-wrap gap-1">
                     {role === "redattore" && <AdminTag>redattore</AdminTag>}

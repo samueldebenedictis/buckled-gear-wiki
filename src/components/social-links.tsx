@@ -10,7 +10,7 @@ const SOCIAL = [
 /** Riga di icone bianche, gialle al passaggio, come nel menu dell'originale. */
 export function SocialLinks() {
   return (
-    <ul className="mt-[15px] flex gap-[13px]">
+    <ul className="mt-3.75 flex gap-3.25">
       {SOCIAL.map((s) => (
         <li key={s.label}>
           <a

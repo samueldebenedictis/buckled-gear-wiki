@@ -33,7 +33,7 @@ export function PublishToggle({
         type="submit"
         disabled={pending}
         aria-label={`${published ? "Unpublish" : "Publish"} ${name}`}
-        className={`w-[92px] border px-2 py-1 max-sm:w-[80px] text-[11px] font-black tracking-wide uppercase disabled:opacity-50 ${
+        className={`w-23 border px-2 py-1 max-sm:w-20 text-[11px] font-black tracking-wide uppercase disabled:opacity-50 ${
           published
             ? "border-white/60 bg-black text-white hover:border-white hover:bg-zinc-800"
             : "border-buckled-yellow bg-buckled-yellow text-black hover:bg-buckled-orange"

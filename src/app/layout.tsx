@@ -21,9 +21,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="it" className={`${dmSans.variable} ${unbounded.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         {/* Come buckled.it: contenuto centrato in 1140 px, 30 px di margine ai lati. */}
-        <header className="relative z-40 border-b border-black bg-buckled-yellow px-[30px] text-buckled-green max-lg:py-2.5 max-md:py-[15px]">
-          <div className="mx-auto flex min-h-[60px] max-w-[1140px] items-center justify-between gap-3 max-lg:min-h-10">
-            <Link href="/" className="font-display text-[20px] leading-[20px] font-black tracking-wide uppercase">
+        <header className="relative z-40 border-b border-black bg-buckled-yellow px-7.5 text-buckled-green max-lg:py-2.5 max-md:py-3.75">
+          <div className="mx-auto flex min-h-15 max-w-285 items-center justify-between gap-3 max-lg:min-h-10">
+            <Link href="/" className="font-display text-[20px] leading-5 font-black tracking-wide uppercase">
               Buckled Gear Wiki
             </Link>
             {/* Tutte le voci stanno nel burger. */}
