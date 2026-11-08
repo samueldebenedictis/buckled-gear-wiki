@@ -40,7 +40,7 @@ async function Content() {
               <h2 className="font-display text-[15px] font-black uppercase">
                 {status === "in_uso" ? "In uso" : "Dismesse"} ({group.length})
               </h2>
-              <ul className="grid gap-6 sm:grid-cols-2">
+              <ul data-reveal className="grid gap-6 sm:grid-cols-2">
                 {group.map((item) => (
                   <li key={item.gear.id}>
                     <GearCard item={item} />

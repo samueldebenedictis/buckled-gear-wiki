@@ -44,7 +44,7 @@ async function Rankings() {
   ];
 
   return (
-    <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+    <div data-reveal className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
       {boards.map((b) => (
         <Ranking key={b.title} board={b} first={b.items[0] ? cards.get(b.items[0].id) : undefined} />
       ))}

@@ -93,7 +93,7 @@ async function Content({ params }: Pick<Props, "params">) {
       {[...groups].map(([category, items]) => (
         <section key={category} className="flex flex-col gap-4">
           {groups.size > 1 && <h2 className="text-xl font-semibold">{CATEGORY_LABELS[category as keyof typeof CATEGORY_LABELS]}</h2>}
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          <div data-reveal className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {items.map((it) => {
               const card = g.cards.get(it.productId);
               if (!card) return null;

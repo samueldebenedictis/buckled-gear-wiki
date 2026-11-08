@@ -137,7 +137,7 @@ async function Catalog({ searchParams }: Pick<PageProps<"/">, "searchParams">) {
           ))}
         </div>
       ) : (
-        <div className="grid gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        <div data-reveal className="grid gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <ProductCard key={item.id} item={item} />
           ))}

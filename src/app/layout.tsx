@@ -3,6 +3,7 @@ import { DM_Sans, Unbounded } from "next/font/google";
 import Link from "next/link";
 import { Suspense } from "react";
 import { HeaderMenu } from "@/components/header-menu";
+import { RevealObserver } from "@/components/reveal-observer";
 import { UserNav } from "@/components/user-nav";
 import "./globals.css";
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="it" className={`${dmSans.variable} ${unbounded.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <RevealObserver />
         {/* Come buckled.it: contenuto centrato in 1140 px, 30 px di margine ai lati. */}
         <header className="relative z-40 border-b border-black bg-buckled-yellow px-7.5 text-buckled-green max-lg:py-2.5 max-md:py-3.75">
           <div className="mx-auto flex min-h-15 max-w-285 items-center justify-between gap-3 max-lg:min-h-10">

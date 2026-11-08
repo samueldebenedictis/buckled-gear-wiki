@@ -17,7 +17,7 @@ export default async function GuidesPage() {
   return (
     <main className={PAGE_WIDE}>
       <h1 className={pageTitleClass}>Guide</h1>
-      <ul className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <ul data-reveal className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {list.map((g) => (
           <li key={g.slug}>
             <Link

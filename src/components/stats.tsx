@@ -43,7 +43,7 @@ function Bar({
       title={title}
       className="relative h-6.25 overflow-hidden bg-buckled-paper"
     >
-      <div className={`absolute inset-y-0 left-0 ${fill[tone]}`} style={{ width: pct(share) }} />
+      <div data-grow className={`absolute inset-y-0 left-0 ${fill[tone]}`} style={{ width: pct(share) }} />
       <div className={`relative flex justify-between gap-3 px-3.75 ${barText}`}>
         <span className="truncate">{label}</span>
         <span className="shrink-0 tabular-nums">{value}</span>

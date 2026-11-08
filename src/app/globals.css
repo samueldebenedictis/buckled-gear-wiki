@@ -88,3 +88,17 @@ p a {
   background: #0a0a0a;
   border-color: #3f3f46;
 }
+
+/* Schede che salgono dal basso e barre che crescono entrando nello schermo: partono
+   nascoste, le anima RevealObserver. Solo con JavaScript attivo e senza "riduci movimento"; altrimenti
+   restano semplicemente visibili. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] > * {
+    opacity: 0;
+  }
+  /* Barre dei punteggi: partono vuote e crescono da sinistra. */
+  [data-grow] {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+}
